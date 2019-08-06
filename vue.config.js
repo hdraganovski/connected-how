@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '<connected-how>'
+    publicPath: 'connected-how'
 }
