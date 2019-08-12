@@ -14,7 +14,7 @@
 @import "./assets/scss/main.scss";
 
 html {
-    overflow: auto !important;
+  overflow: auto !important;
 }
 
 #app {
@@ -37,9 +37,9 @@ html {
   border-color: $text-light;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-    
+
   transition: all 200ms ease-in;
-  
+
   a {
     transition: all 200ms ease-in;
     margin: 0 15px;
@@ -50,7 +50,7 @@ html {
     border-color: $transparent;
     border-bottom-width: 2px;
     border-bottom-style: solid;
-      background: #0002;
+    background: #0002;
     &.router-link-exact-active {
       color: lighten($green, 20);
     }

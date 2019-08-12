@@ -1,55 +1,50 @@
 <template>
   <section>
-      <v-autocomplete 
-        :loading="loading"
-        :items="response"
-        :search-input.sync="search"
-        :filter="filter"
-        v-model="select"
-        cache-items
-        item-text="label"
-        item-value="resource"
-      />
-    <ul>
-      <li v-for="(val, key) in response" :key="key">{{ key }}: {{ val }}</li>
-    </ul>
+    <SelectResource class="select-resource" />
+    <SelectResource class="select-resource" />
   </section>
 </template>
 
 <script>
 import DbpediaService from "../services/dbpediaService";
+import SelectResource from "../components/SelectResource";
+import _ from "lodash"
 
 export default {
-  data: function() {
-    return {
-      response: [],
-      loading: false,
-      search: null,
-      select: null
-    };
-  },
-  watch: {
-      search (val) {
-          val && val != this.select && this.querySelections(val)
-      }
+  components: {
+    SelectResource
   },
   methods: {
-      querySelections (v) {
-          this.loading = true
-
-          DbpediaService.search(v)
-            .then(response => {
-                this.response = response
-            })
-            .catch(e => console.error(e))
-            .finally(() => this.loading = false)
-      },
-      filter (item, queryText, itemText) {
-          let regex = new RegExp(".*" + queryText + ".*")
-          return regex.test(itemText)
-      }
+    querySelections() {
+      this.loading = true;
+      DbpediaService.search(this.search)
+        .then(response => {
+          this.response = response;
+        })
+        .catch(e => console.error(e))
+        .finally(() => (this.loading = false));
+    },
+    filter(item, queryText, itemText) {
+      let regex = new RegExp(".*" + queryText + ".*");
+      return regex.test(itemText);
+    },
+    theCall() {
+      console.log("Got to here")
+      _.debounce(this.querySelections, 20);
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .select-resource {
+    margin: 0 auto;
+  }
+
+  section {
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+</style>
