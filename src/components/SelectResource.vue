@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card class="wrap">
     <v-autocomplete
       :search-input.sync="query"
       :items="searchResults"
@@ -16,7 +16,7 @@
     <!-- <ul class="res">
       <li v-for="(val, key) in selectedResource" :key="key">{{key}}: {{val}}</li>
     </ul> -->
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -25,9 +25,10 @@ var _ = require("lodash");
 import DbpediaService from "../services/dbpediaService";
 
 export default {
+  props: ['value', 'compact'],
   data: function() {
     return {
-      selected: null,
+      selected: this.value,
       query: "",
       searchResults: [],
       loading: false,
@@ -54,7 +55,8 @@ export default {
     },
     selected(newVal, oldVal) {
         // if(oldVal != newVal && newVal) {
-            console.log("Got to here")
+            // console.log("Got to here")
+            this.$emit("input", newVal)
             DbpediaService.shortInfo(newVal)
             .then(response => this.selectedResource = response )
             .catch(e => console.error(e))
@@ -65,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.res {
-    max-width: 300px;
-}
+  .wrap {
+    padding: 5px 20px;
+  }
 </style>

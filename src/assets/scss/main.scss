@@ -4,3 +4,89 @@ html, body {
     margin: 0;
     background: $background;
 }
+
+
+html {
+    overflow: auto !important;
+  }
+  
+  #app {
+    font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    font-weight: 300;
+    color: $text-light;
+    background: #fff;
+  }
+  #nav {
+    display: flex;
+    justify-content: end;
+    align-items: flex-start;
+    margin: 0;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    height: 180px;
+    background: url(./assets/bg.svg);
+    background-position: bottom;
+    transition: all 200ms ease-in;
+    position: absolute;
+    width: 100vw;
+    z-index: 0;
+    color: $text-dark;
+    font-weight: bold;
+    
+    a {
+      transition: all 200ms ease-in;
+      margin: 0 15px;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: $text-dark;
+      text-decoration: none;
+      border: 1px solid;
+      background: #fff1;
+      &.router-link-exact-active {
+        color: $orange;
+      }
+      &:hover {
+        background: #fff2;
+      }
+      &:active {
+        background: darken($orange, 20);
+        border-color: $orange;
+        color: white;
+      }
+    }
+  }
+  
+  #logo {
+    flex-grow: 1;
+    text-align: left;
+    margin: 0 15px;
+    padding: 5px 15px;
+    font-size: 25px;
+  }
+
+   /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  transition-duration: 1000ms;
+  background: #3789eb90;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3789ebd0;
+} 
