@@ -28,13 +28,11 @@ html {
     position: sticky;
     top: 0;
     height: 180px;
-    background: url(./assets/bg.svg);
-    background-position: bottom;
     transition: all 200ms ease-in;
     position: absolute;
     width: 100vw;
     z-index: 0;
-    color: $text-dark;
+    color: white;
     font-weight: bold;
     
     a {
@@ -43,7 +41,7 @@ html {
       padding: 5px 15px;
       border-radius: 20px;
       font-weight: bold;
-      color: $text-dark;
+      color: $white;
       text-decoration: none;
       border: 1px solid;
       background: #fff1;
@@ -90,3 +88,45 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #3789ebd0;
 } 
+
+.bg1 {
+  background: url("./assets/bg1.svg");
+  animation: leftRight 10s ease-in-out infinite;
+}
+
+.bg2 {
+  background: url("./assets/bg2.svg");
+  animation: leftRight 15s ease-in-out infinite;
+}
+
+.bg3 {
+  background: url("./assets/bg3.svg" );
+  animation: leftRight 20s ease-in-out infinite;
+  animation-direction: alternate-reverse;
+}
+
+.bg1, .bg2, .bg3 {
+  background-position: bottom;
+  height: 220px;
+  background-repeat: repeat-x;
+  position: absolute;
+  width: 100%;
+  &::after {
+    content: '\200b';
+  }
+}
+
+@keyframes leftRight {
+  0% {
+    background-position: 0% 100%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 100%
+  }
+}
+

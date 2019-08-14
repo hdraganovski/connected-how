@@ -1,7 +1,10 @@
 <template>
   <v-app id="app">
-    <!-- <div class="bg">a
-    </div>-->
+    <div class="bg">
+      <div class="bg1"></div>
+      <div class="bg2"></div>
+      <div class="bg3"></div>
+    </div>
     <div id="nav">
       <div id="logo">Connected how</div>
       <router-link to="/">Home</router-link>

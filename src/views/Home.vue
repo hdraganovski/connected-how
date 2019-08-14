@@ -16,9 +16,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  #nav {
-    height: 600px;
-  }
-</style>

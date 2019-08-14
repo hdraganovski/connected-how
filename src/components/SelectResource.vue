@@ -7,11 +7,14 @@
       item-text="label"
       item-value="resource"
       v-model="selected"
+      :class="{ compact: compact }"
     />
     <div v-if="selectedResource" class="res">
-      <img :src="selectedResource.thumbnail" />
-      <h4>{{selectedResource.label}}</h4>
-      <p>{{selectedResource.abstract}}</p>
+      <img :src="selectedResource.thumbnail" 
+      :class="{ compact: compact }"/>
+      <h4 >{{selectedResource.label}}</h4>
+      <p 
+      :class="{ compact: compact }">{{selectedResource.abstract}}</p>
     </div>
     <!-- <ul class="res">
       <li v-for="(val, key) in selectedResource" :key="key">{{key}}: {{val}}</li>
@@ -69,5 +72,16 @@ export default {
 <style lang="scss" scoped>
   .wrap {
     padding: 5px 20px;
+    
+    & * {
+      transition: 500ms ease-in-out;
+      max-height: 9999px;
+    }
+  }
+
+  .compact {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <SelectResource v-model="left" class="select-resource" :compact="showGraph"/>
-    <SelectResource v-model="right" class="select-resource" :compact="showGraph"/>
+  <section :class="{ aside: showGraph }" >
+    <SelectResource v-model="left" class="select-resource" :class="{ aside: showGraph }" :compact="showGraph"/>
+    <SelectResource v-model="right" class="select-resource" :class="{ aside: showGraph }" :compact="showGraph"/>
     <div class="action-button" v-if="left && right">
       <v-btn rounded color="secondary" dark @click="showGraph = !showGraph">{{showGraph ? 'Close graph' : 'Show graph'}}</v-btn>
     </div>
@@ -47,11 +47,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .aside {
+    transition: 500ms ease-in;
+  }
+
   .select-resource {
-    margin: 0 auto;
     width: 500px;
     height: 85vh;
     overflow: auto;
+    margin: 0 auto;
+    // transition: 500ms ease-in;
+
+    &.aside {
+      height: unset;
+      width: 250px;
+      margin: 0 40px;
+    }
   }
 
   section {
@@ -59,6 +71,8 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    justify-content: space-between;
+    transition: 500ms ease-in;
   }
 
   .action-button {
