@@ -23,5 +23,7 @@
 #router {
   margin-top: 80px;
   z-index: 1;
+  position: relative;
+  flex-grow: 1;
 }
 </style>
