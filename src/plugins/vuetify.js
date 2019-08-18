@@ -7,9 +7,9 @@ Vue.use(Vuetify);
 export default new Vuetify({
   theme: {
     themes: {
-    light: {
-      secondary: '#ffca1e'
+      light: {
+        secondary: "#ffca1e"
+      }
     }
-  }
   }
 });

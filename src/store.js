@@ -12,17 +12,17 @@ export default new Vuex.Store({
   },
   mutations: {
     setLeftUri(state, uri) {
-      state.leftUri = uri
+      state.leftUri = uri;
     },
     setRightUri(state, uri) {
-      state.rightUri = uri
+      state.rightUri = uri;
     },
     setLeftResource(state, resource) {
-      state.leftResource = resource
+      state.leftResource = resource;
     },
     setRightResource(state, resource) {
-      state.rightResource = resource
-    },
+      state.rightResource = resource;
+    }
   },
   actions: {}
 });

@@ -6,7 +6,7 @@
       <div class="bg3"></div>
     </div>
     <div id="nav">
-      <div id="logo">Connected how</div>
+      <div id="logo">Connected how?</div>
       <router-link to="/">Home</router-link>
       <router-link to="/app">App</router-link>
       <router-link to="/about">About</router-link>

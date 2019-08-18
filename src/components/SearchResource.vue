@@ -9,9 +9,9 @@
       v-model="value"
     />
     <div v-if="resource" class="res">
-      <img :src="resource.thumbnail" />
-      <h4>{{resource.label}}</h4>
-      <p>{{resource.abstract}}</p>
+      <v-img :src="resource.thumbnail" />
+      <h4>{{ resource.label }}</h4>
+      <p>{{ resource.abstract }}</p>
     </div>
   </v-card>
 </template>
@@ -31,20 +31,22 @@ export default {
   },
   methods: {
     search: _.debounce(function(query) {
-      this.loading = true;
-      DbpediaService.search(query)
-        .then(response => {
-          this.searchResults = response;
-        })
-        .catch(e => console.error(e))
-        .finally(() => (this.loading = false));
+      if (query && query.length >= 2) {
+        this.loading = true;
+        DbpediaService.search(query)
+          .then(response => {
+            this.searchResults = response;
+          })
+          .catch(e => console.error(e))
+          .finally(() => (this.loading = false));
+      }
     }, 500)
   },
   watch: {
     query(val) {
       this.search(val);
     },
-    value(newVal, oldVal) {
+    value(newVal) {
       this.$emit("input", newVal);
     }
   }
@@ -52,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .wrap {
-        padding: 5px 20px;
-    }
+.wrap {
+  padding: 5px 20px;
+}
 </style>
