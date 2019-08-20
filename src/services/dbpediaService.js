@@ -5,7 +5,7 @@ const dbpediaUrl = "https://dbpedia.org/sparql";
 
 async function search(query) {
   var response = await axios.get(
-    "http://lookup.dbpedia.org/api/search/KeywordSearch",
+    "https://lookup.dbpedia.org/api/search/KeywordSearch",
     {
       params: {
         QueryString: query,
