@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/connected-how/precache-manifest.edf1d6c52ebb7c82abab3825e0f6a69f.js"
+  "/connected-how/precache-manifest.78afaab89f18f730c8e024a3ac8931c3.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "connected-how"});
