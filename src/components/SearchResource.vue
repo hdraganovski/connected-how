@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import DbpediaService from "../services/dbpediaService";
+import DbpediaService from "@/services/dbpediaService";
 var _ = require("lodash");
 
 export default {
@@ -47,7 +47,7 @@ export default {
       this.search(val);
     },
     value(newVal) {
-      this.$emit("input", newVal);
+      if (newVal) this.$emit("input", newVal);
     }
   }
 };

@@ -1,0 +1,43 @@
+.bg1 {
+    background: url("./assets/bg1.svg");
+    animation: leftRight 10s ease-in-out infinite;
+}
+
+.bg2 {
+    background: url("./assets/bg2.svg");
+    animation: leftRight 15s ease-in-out infinite;
+}
+
+.bg3 {
+    background: url("./assets/bg3.svg");
+    animation: leftRight 20s ease-in-out infinite;
+    animation-direction: alternate-reverse;
+}
+
+.bg1,
+.bg2,
+.bg3 {
+    background-position: bottom;
+    height: 220px;
+    background-repeat: repeat-x;
+    position: absolute;
+    width: 100%;
+
+    &::after {
+        content: '\200b';
+    }
+}
+
+@keyframes leftRight {
+    0% {
+        background-position: 0% 100%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 100%
+    }
+}

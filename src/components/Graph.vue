@@ -14,6 +14,7 @@ export default {
   },
   data: function() {
     return {
+      svg: null,
       simulation: null,
       node: null,
       link: null,
@@ -22,73 +23,26 @@ export default {
     };
   },
   mounted() {
+    this.svg = d3.select(this.$refs.graph);
+
     this.simulation = d3
       .forceSimulation(this.nodeData)
       .force(
         "link",
         d3
           .forceLink(this.linkData)
+          // @ts-ignore
           .id(d => d.id)
-          .distance(200)
+          .distance(150)
       )
-      .force("charge", d3.forceManyBody().strength(-200))
-      //   .force("collide", d3.forceCollide(15))
+      .force("charge", d3.forceManyBody().strength(-100))
+      .force("colide", d3.forceCollide().radius(25))
       .force("center", d3.forceCenter(200, 200));
+    // .force("size", [200, 200]);
 
-    this.onResize();
+    this.link = this.svg.append("g").selectAll(".link");
 
-    const svg = d3.select(this.$refs.graph);
-
-    this.link = svg
-      .append("g")
-      .attr("stroke", "#999")
-      .attr("stroke-opacity", 0.4)
-      .selectAll("line")
-      .data(this.linkData)
-      .join("line")
-      .attr("stroke-width", 1);
-
-    // this.node = svg
-    //   .append("g")
-    //   .attr("stroke", "#fff")
-    //   .attr("stroke-width", 1.5)
-    //   .selectAll("circle")
-    //   .data(this.nodeData)
-    //   .join("circle")
-    //   .attr("r", 8)
-    //   .attr("fill", "red")
-    //   .call(this.drag(this.simulation));
-
-    this.node = svg
-      .selectAll(".node")
-      .data(this.nodeData)
-      .enter()
-      .append("g")
-      .attr("class", "node")
-      .call(this.drag(this.simulation))
-      .on("click", this.onNodeClick)
-      .on("mouseover", d => {
-        this.node.attr("opacity", el => (el == d ? 1 : 0.2));
-      })
-      .on("mouseout", () => {
-        this.node.attr("opacity", 1);
-      });
-
-    this.node
-      .append("text")
-      .attr("dx", 12)
-      .attr("dy", "0.35em")
-      .attr("font-size", 16)
-      .attr("color", "#0001")
-      .attr("opacity", 0.8)
-      .text(function(d) {
-        return d.label;
-      });
-
-    this.node
-      .append("circle")
-      .attr("r", 10)
-      .attr("fill", "orange");
+    this.node = this.svg.append("g").selectAll(".node");
 
     this.simulation.on("tick", () => {
       this.link
@@ -99,15 +53,85 @@ export default {
 
       this.node
         .attr("r", 8)
-        .attr("cx", d => d.x)
-        .attr("cy", d => d.y)
+        .attr("cx", d => {
+          return (d.x = Math.max(0, Math.min(d.x, this.width)));
+        })
+        .attr("cy", d => {
+          return (d.y = Math.max(0, Math.min(d.y, this.height)));
+        })
         .attr("transform", function(d) {
           return "translate(" + d.x + "," + d.y + ")";
         });
     });
+    this.onDataChange();
     this.onResize();
   },
+  watch: {
+    nodeData() {
+      this.onDataChange();
+    },
+    linkData() {
+      this.onDataChange();
+    }
+  },
   methods: {
+    onDataChange() {
+      this.node = this.node.data(this.nodeData, d => d.id);
+
+      this.node.exit().remove();
+
+      var tmpNode = this.node
+        .enter()
+        .append("g")
+        .attr("class", "node")
+        .call(this.drag(this.simulation))
+        .on("click", d => this.onNodeClick(d))
+        .on("mouseover", d => {
+          this.node.attr("opacity", el => (el == d ? 1 : 0.2));
+        })
+        .on("mouseout", () => {
+          this.node.attr("opacity", 1);
+        });
+
+      tmpNode
+        .append("text")
+        .attr("dx", 12)
+        .attr("dy", "0.35em")
+        .attr("font-size", 16)
+        .attr("color", "#0001")
+        .attr("opacity", 0.8)
+        .text(function(d) {
+          return d.label;
+        });
+
+      tmpNode
+        .append("circle")
+        .attr("r", 10)
+        .attr("fill", "orange");
+
+      this.node = tmpNode.merge(this.node);
+
+      // @ts-ignore
+      this.link = this.link.data(this.linkData, d => d.source + "-" + d.target);
+
+      this.link.exit().remove();
+
+      var tmpLink = this.link
+        .enter()
+        .append("line")
+        .attr("stroke-width", 1)
+        .attr("stroke", "#999")
+        .attr("stroke-opacity", 0.4);
+      // @ts-ignore
+      // .merge(this.link!);
+
+      this.link = tmpLink.merge(this.link);
+
+      this.simulation.nodes(this.nodeData);
+      this.simulation.force("link").links(this.linkData);
+      this.simulation.alpha(1).restart();
+      // this.simulation!.tick()
+    },
     getNeighbors(node) {
       return this.linkData.reduce(
         (neighbors, link) => {
@@ -160,7 +184,7 @@ export default {
       }
     },
     onNodeClick(el) {
-      this.$emit("on-node-click", el.data);
+      this.$emit("on-node-click", el.id);
     }
   }
 };

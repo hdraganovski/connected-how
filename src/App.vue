@@ -21,9 +21,16 @@
 @import "./assets/scss/main.scss";
 
 #router {
-  margin-top: 80px;
   z-index: 1;
-  position: relative;
+  // position: relative;
   flex-grow: 1;
+}
+
+.bg {
+  z-index: 0;
+}
+
+.page-view {
+  z-index: 1;
 }
 </style>

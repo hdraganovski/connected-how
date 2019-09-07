@@ -4,8 +4,8 @@ import _ from "lodash";
 const dbpediaUrl = "https://dbpedia.org/sparql";
 
 async function search(query) {
-  var response = await axios.get(
-    "https://lookup.dbpedia.org/api/search/KeywordSearch",
+  let response = await axios.get(
+    "http://lookup.dbpedia.org/api/search/KeywordSearch",
     {
       params: {
         QueryString: query,
@@ -13,15 +13,17 @@ async function search(query) {
       }
     }
   );
-  return response.data.results.map(el => {
+
+  return response.data["results"].map(el => {
     return {
-      resource: el.uri,
-      label: el.label
+      uri: el["uri"],
+      label: el["label"],
+      description: el["description"]
     };
   });
 }
 
-async function getResource(resource) {
+async function getResource(uri) {
   let query = [
     "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "prefix dbr: <http://dbpedia.org/resource/>",
@@ -29,8 +31,33 @@ async function getResource(resource) {
     "from <http://dbpedia.org>",
     "where",
     "{",
-    "<" + resource + ">",
-    "?a ?b.",
+    "{",
+    "<" + uri + ">",
+    "?property ?value.",
+    "OPTIONAL {",
+    "?value rdfs:label ?label.",
+    'FILTER(langMatches(lang(?label), "EN")).',
+    "}.",
+    "OPTIONAL {",
+    "?property rdfs:label ?relation.",
+    'FILTER(langMatches(lang(?relation), "EN")).',
+    "}.",
+    "}",
+    "union",
+    "{",
+    "?value ?property",
+    "<" + uri + ">",
+    "OPTIONAL {",
+    "?value rdfs:label ?label.",
+    'FILTER(langMatches(lang(?label), "EN")).',
+    "}.",
+    "OPTIONAL {",
+    "?property rdfs:label ?relation.",
+    'FILTER(langMatches(lang(?relation), "EN")).',
+    "}.",
+    "}",
+    'FILTER(STRSTARTS(STR(?property), "http://dbpedia.org/property") || STRSTARTS(STR(?property), "http://dbpedia.org/ontology"))',
+    'FILTER(!isLiteral(?value) || langMatches(lang(?value), "EN"))',
     "}"
   ].join(" ");
 
@@ -43,10 +70,17 @@ async function getResource(resource) {
     }
   });
 
-  return response.data.results.bindings;
+  return response.data.results.bindings.map(el => {
+    return {
+      label: el.label ? el.label.value : undefined,
+      property: el.property ? el.property.value : undefined,
+      relation: el.relation ? el.relation.value : undefined,
+      uri: el.value.value
+    };
+  });
 }
 
-async function shortInfo(resource) {
+async function shortInfo(uri) {
   let query = [
     "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "prefix dbr: <http://dbpedia.org/resource/>",
@@ -55,11 +89,11 @@ async function shortInfo(resource) {
     "from <http://dbpedia.org>",
     "where",
     "{",
-    "<" + resource + ">",
+    "<" + uri + ">",
     "rdfs:label ?label;",
     "dbo:abstract ?abstract.",
     "OPTIONAL {",
-    "<" + resource + ">",
+    "<" + uri + ">",
     "dbo:thumbnail ?thumbnail }.",
     'filter(langMatches(lang(?label), "EN")).',
     'filter(langMatches(lang(?abstract), "EN")).',
