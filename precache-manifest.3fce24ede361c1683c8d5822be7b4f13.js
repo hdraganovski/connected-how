@@ -1,22 +1,22 @@
 self.__precacheManifest = [
   {
-    "revision": "ef5bf6cf3dfcacd1d32b",
-    "url": "/connected-how/js/chunk-vendors.20acf22d.js"
+    "revision": "e650af5c3b26972f88e3",
+    "url": "/connected-how/js/chunk-vendors.c046783b.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/connected-how/robots.txt"
   },
   {
-    "revision": "29968941f1007c7b1a79",
-    "url": "/connected-how/js/app.aa7d42f1.js"
+    "revision": "39844de80e88507dee57",
+    "url": "/connected-how/js/app.71508fc8.js"
   },
   {
-    "revision": "2d65668f7cd66d253ff4",
-    "url": "/connected-how/js/about.6a14641b.js"
+    "revision": "d28d190984177976c51e",
+    "url": "/connected-how/js/about.718381e8.js"
   },
   {
-    "revision": "c68e5aba3b04930d86686edb33848c35",
+    "revision": "f9f3249b3ea8792c97745fbcfa36c292",
     "url": "/connected-how/index.html"
   },
   {
@@ -32,15 +32,15 @@ self.__precacheManifest = [
     "url": "/connected-how/img/bg1.eb136a80.svg"
   },
   {
-    "revision": "ef5bf6cf3dfcacd1d32b",
+    "revision": "e650af5c3b26972f88e3",
     "url": "/connected-how/css/chunk-vendors.56a9e82f.css"
   },
   {
-    "revision": "29968941f1007c7b1a79",
+    "revision": "39844de80e88507dee57",
     "url": "/connected-how/css/app.1bc99ce7.css"
   },
   {
-    "revision": "2d65668f7cd66d253ff4",
-    "url": "/connected-how/css/about.ecdd307c.css"
+    "revision": "d28d190984177976c51e",
+    "url": "/connected-how/css/about.93de5be4.css"
   }
 ];
