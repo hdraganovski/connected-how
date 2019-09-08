@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/connected-how/robots.txt"
   },
   {
-    "revision": "eb2c5be7adaadf8b0407",
-    "url": "/connected-how/js/app.be52f511.js"
+    "revision": "cf7d547e9bf8b478e9d1",
+    "url": "/connected-how/js/app.7fe8f18f.js"
   },
   {
     "revision": "c8bf34db97436e678419",
     "url": "/connected-how/js/about.ad9572e2.js"
   },
   {
-    "revision": "0d0680a52b43b37c1f8cdd95c5713799",
+    "revision": "9ac030684063c5eeb9acfceecc1660f4",
     "url": "/connected-how/index.html"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/connected-how/css/chunk-vendors.56a9e82f.css"
   },
   {
-    "revision": "eb2c5be7adaadf8b0407",
+    "revision": "cf7d547e9bf8b478e9d1",
     "url": "/connected-how/css/app.1bc99ce7.css"
   },
   {
