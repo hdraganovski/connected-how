@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import _ from 'lodash';
 
 Vue.use(Vuex);
 
@@ -22,29 +23,33 @@ export default new Vuex.Store({
           data: {}
         });
         if (state.resourceInfoMap[el.uri]) {
-          state.resourceInfoMap[el.uri].forEach(_el => {
-            nodes.push({
-              id: _el.uri,
-              label: _el.label,
-              data: {}
+          state.resourceInfoMap[el.uri]
+            .filter(_el => _el.label)
+            .forEach(_el => {
+              nodes.push({
+                id: _el.uri,
+                label: _el.label,
+                data: {}
+              });
             });
-          });
         }
       });
 
-      return nodes;
+      return _.uniqBy(nodes, 'id');
     },
     graphLinks: state => {
       var links = [];
       state.update;
       state.selectedResources.forEach(el => {
         if (state.resourceInfoMap[el.uri]) {
-          state.resourceInfoMap[el.uri].forEach(_el => {
-            links.push({
-              source: el.uri,
-              target: _el.uri
+          state.resourceInfoMap[el.uri]
+            .filter(_el => _el.label)
+            .forEach(_el => {
+              links.push({
+                source: el.uri,
+                target: _el.uri
+              });
             });
-          });
         }
       });
       return links;
