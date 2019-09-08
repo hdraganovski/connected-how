@@ -2,34 +2,16 @@
   <v-card class="wrap" v-if="resource">
     <!-- {{resourceData}} -->
     <div class="actions">
-      <v-btn
-        @click="add"
-        class="close-button"
-        text
-        icon
-        color="green lighten-2"
-        small
-      >
+      <v-btn @click="add" class="close-button" text icon color="green lighten-2" small>
         <v-icon>mdi-plus</v-icon>
       </v-btn>
 
-      <v-btn
-        @click="close"
-        class="close-button"
-        text
-        icon
-        color="red lighten-2"
-        small
-      >
+      <v-btn @click="close" class="close-button" text icon color="red lighten-2" small>
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </div>
     <div v-if="resourceData" class="content">
-      <v-img
-        v-if="resourceData.thumbnail"
-        :src="resourceData.thumbnail"
-        contain
-      />
+      <v-img v-if="resourceData.thumbnail" :src="resourceData.thumbnail" contain />
       <h4>{{ resourceData.label }}</h4>
       <p>{{ resourceData.abstract }}</p>
     </div>

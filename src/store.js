@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import _ from "lodash";
+import _ from 'lodash';
 
 Vue.use(Vuex);
 
@@ -35,7 +35,7 @@ export default new Vuex.Store({
         }
       });
 
-      return _.uniqBy(nodes, "id");
+      return _.uniqBy(nodes, 'id');
     },
     graphLinks: state => {
       var links = [];

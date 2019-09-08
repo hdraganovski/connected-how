@@ -5,7 +5,7 @@ const dbpediaUrl = "https://dbpedia.org/sparql";
 
 async function search(query) {
   let response = await axios.get(
-    "http://lookup.dbpedia.org/api/search/KeywordSearch",
+    "https://connected-how-search-proxy.herokuapp.com",
     {
       params: {
         QueryString: query,
@@ -25,33 +25,33 @@ async function search(query) {
 
 async function getResource(uri) {
   let query = [
-    "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
-    "prefix dbr: <http://dbpedia.org/resource/>",
-    "select *",
-    "from <http://dbpedia.org>",
-    "where",
-    "{",
-    "{",
-    "<" + uri + ">",
-    "?property ?value.",
-    "?value rdfs:label ?label.",
-    "?property rdfs:label ?relation.",
+    'prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>',
+    'prefix dbr: <http://dbpedia.org/resource/>',
+    'select *',
+    'from <http://dbpedia.org>',
+    'where',
+    '{',
+    '{',
+    '<' + uri + '>',
+    '?property ?value.',
+    '?value rdfs:label ?label.',
+    '?property rdfs:label ?relation.',
     'FILTER(langMatches(lang(?label), "EN")).',
     'FILTER(langMatches(lang(?relation), "EN")).',
-    "}",
-    "union",
-    "{",
-    "?value ?property",
-    "<" + uri + ">.",
-    "?value rdfs:label ?label.",
-    "?property rdfs:label ?relation.",
+    '}',
+    'union',
+    '{',
+    '?value ?property',
+    '<' + uri + '>.',
+    '?value rdfs:label ?label.',
+    '?property rdfs:label ?relation.',
     'FILTER(langMatches(lang(?label), "EN")).',
     'FILTER(langMatches(lang(?relation), "EN")).',
-    "}",
+    '}',
     'FILTER(STRSTARTS(STR(?property), "http://dbpedia.org/property") || STRSTARTS(STR(?property), "http://dbpedia.org/ontology"))',
     'FILTER(!isLiteral(?value) || langMatches(lang(?value), "EN"))',
     'FILTER regex(?relation, "^(?!Wikipage)", "i")',
-    "}"
+    '}'
   ].join(" ");
 
   var response = await axios.get(dbpediaUrl, {

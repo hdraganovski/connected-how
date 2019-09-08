@@ -16,14 +16,16 @@
               <span class="label">{{ el.label }}</span>
             </div>
           </template>
+          <!-- :filter="filter" -->
           <v-autocomplete
             :items="searchResult"
             :loading="loading"
             :search-input.sync="query"
+            no-filter
             v-model="model"
             item-text="label"
             item-value="uri"
-            cache-items
+            hide-no-data
           >
             <template v-slot:append-outer>
               <v-btn
@@ -75,8 +77,13 @@ export default {
     onAddResource(uri) {
       var res = _.find(this.searchResult, el => el.uri == uri);
       // this.resourcesList.push(res!);
-      if (res) this.$emit("on-add", res);
+      if(res)
+        this.$emit("on-add", res);
       this.model = null;
+    },
+    filter(item, queryText, itemText) {
+      var reg = new RegExp('.*' + queryText + '.*');
+      return reg.test(itemText);
     }
   },
   watch: {
