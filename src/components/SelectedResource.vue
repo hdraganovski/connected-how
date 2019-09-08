@@ -3,7 +3,7 @@
     <!-- {{resourceData}} -->
     <div class="actions">
       <v-btn
-        @click="close"
+        @click="add"
         class="close-button"
         text
         icon
@@ -67,6 +67,14 @@ export default {
     },
     close() {
       this.$emit("close");
+    },
+    add() {
+      if (this.resourceData) {
+        this.$emit("on-add", {
+          uri: this.resource,
+          label: this.resourceData.label
+        });
+      }
     }
   },
   watch: {

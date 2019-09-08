@@ -9,6 +9,7 @@
     <SelectedResource
       :resource="selectedResource"
       @close="selectedResource = null"
+      @on-add="onAddResource"
       class="selectedResource"
     />
     <Graph
@@ -42,6 +43,7 @@ export default {
           data: response
         });
       });
+      this.selectedResource = null;
     },
     onRemoveResource(i) {
       this.$store.commit("removeResource", i);

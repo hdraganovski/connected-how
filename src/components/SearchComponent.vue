@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-expansion-panels accordion>
+    <v-expansion-panels v-model="opened" accordion>
       <v-expansion-panel>
         <v-expansion-panel-header>Selected resources</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <template v-for="el in resourceList">
+          <template v-for="(el, i) in resourceList">
             <div class="content" :key="el.uri">
               <span style="flex-grow: 0; margin-right: 10px;">
                 <v-btn icon x-small color="error">
@@ -51,6 +51,7 @@ export default {
   props: ["resourceList"],
   data: function() {
     return {
+      opened: 0,
       query: "",
       model: null,
       show: true,
@@ -74,7 +75,7 @@ export default {
     onAddResource(uri) {
       var res = _.find(this.searchResult, el => el.uri == uri);
       // this.resourcesList.push(res!);
-      this.$emit("on-add", res);
+      if (res) this.$emit("on-add", res);
       this.model = null;
     }
   },
