@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/connected-how/robots.txt"
   },
   {
-    "revision": "39844de80e88507dee57",
-    "url": "/connected-how/js/app.71508fc8.js"
+    "revision": "eb2c5be7adaadf8b0407",
+    "url": "/connected-how/js/app.be52f511.js"
   },
   {
-    "revision": "d28d190984177976c51e",
-    "url": "/connected-how/js/about.718381e8.js"
+    "revision": "c8bf34db97436e678419",
+    "url": "/connected-how/js/about.ad9572e2.js"
   },
   {
-    "revision": "f9f3249b3ea8792c97745fbcfa36c292",
+    "revision": "0d0680a52b43b37c1f8cdd95c5713799",
     "url": "/connected-how/index.html"
   },
   {
@@ -36,11 +36,11 @@ self.__precacheManifest = [
     "url": "/connected-how/css/chunk-vendors.56a9e82f.css"
   },
   {
-    "revision": "39844de80e88507dee57",
+    "revision": "eb2c5be7adaadf8b0407",
     "url": "/connected-how/css/app.1bc99ce7.css"
   },
   {
-    "revision": "d28d190984177976c51e",
-    "url": "/connected-how/css/about.93de5be4.css"
+    "revision": "c8bf34db97436e678419",
+    "url": "/connected-how/css/about.78abce67.css"
   }
 ];
